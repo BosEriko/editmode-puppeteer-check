@@ -42,7 +42,7 @@ const PASSWORD = 'password';
   await page.waitFor(3000);
 
   const projectSettingsButton = '#project-settings-button';
-  const projectDeleteButton = '#delete-project-button';
+  const projectDeleteButton = '#project-delete-button';
 
   await page.waitForSelector(projectSettingsButton);
   await page.click(projectSettingsButton);
@@ -50,17 +50,17 @@ const PASSWORD = 'password';
   await page.waitFor(3000);
 
   await page.evaluate(() => {
-    document.getElementById("delete-project-button").scrollIntoView();
+    document.getElementById('project-delete-button').scrollIntoView();
   });
+
+  await page.waitFor(3000);
 
   await page.waitForSelector(projectDeleteButton);
   await page.click(projectDeleteButton);
 
   await page.waitFor(3000);
 
-  await page.screenshot({ path: './tmp/delete-project-button.jpg', type: 'jpeg' });
-
-  await page.keyboard.press(String.fromCharCode(13));  // Simulate a pressing of the Return key
+  await page.keyboard.press(String.fromCharCode(13));
 
   await navigationPromise;
 
