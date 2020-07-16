@@ -35,13 +35,13 @@ const PASSWORD = 'password';
   await page.click('button[type="submit"]');
 
   // Add non collection chunk
-  const addChunkButtonButton = '#add-chunk-button';
+  const addChunkButton = '#add-chunk-button';
   const addChunkInput = 'div #content_piece_single_line_text_content';
   const addChunkCreateButton = '#slide-form-content > #new_content_piece > .form-page-top-section > .inline-flex > .button';
   const closeAddChunkForm = '.c-content_pieces > #slide-form > #slide-form-inner > .js-close-slide-form > svg';
 
-  await page.waitForSelector(addChunkButtonButton);
-  await page.click(addChunkButtonButton);
+  await page.waitForSelector(addChunkButton);
+  await page.click(addChunkButton);
 
   await page.waitFor(3000);
 
@@ -90,8 +90,35 @@ const PASSWORD = 'password';
   await page.waitForSelector(newCollectionSaveButton);
   await page.click(newCollectionSaveButton);
 
+  await page.waitFor(3000);
+
   // Add chunk to collection
-  // await page.screenshot({ path: './tmp/open-add-chunk-form.jpg', type: 'jpeg' });
+  const addCollectionChunkButton = '#add-collection-chunk-button';
+  const addCollectionChunkInput = 'div #content_piece_single_line_text_content';
+  const addCollectionChunkCreateButton = '#slide-form-content > #new_content_piece > .form-page-top-section > .inline-flex > .button';
+  const closeAddCollectionChunkForm = '.c-content_pieces > #slide-form > #slide-form-inner > .js-close-slide-form > svg';
+
+  await page.waitForSelector(addCollectionChunkButton);
+  await page.click(addCollectionChunkButton);
+
+  await page.waitFor(3000);
+
+  await page.waitForSelector(addCollectionChunkInput);
+  await page.type(addCollectionChunkInput, 'Test Collection Chunk');
+
+  await page.waitFor(3000);
+
+  await page.waitForSelector(addCollectionChunkCreateButton);
+  await page.click(addCollectionChunkCreateButton);
+
+  await page.waitFor(3000);
+
+  await page.waitForSelector(closeAddCollectionChunkForm);
+  await page.click(closeAddCollectionChunkForm);
+
+  await page.waitFor(3000);
+
+  await page.screenshot({ path: './tmp/open-add-chunk-form.jpg', type: 'jpeg' });
 
   // Delete the project
   await browser.close();
