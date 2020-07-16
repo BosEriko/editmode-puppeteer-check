@@ -118,7 +118,53 @@ const PASSWORD = 'password';
 
   await page.waitFor(3000);
 
-  await page.screenshot({ path: './tmp/open-add-chunk-form.jpg', type: 'jpeg' });
+  // Click & get 200 for: Team
+  const teamButton = '#team-button';
+
+  await page.waitFor(3000);
+
+  await page.waitForSelector(teamButton);
+  await page.click(teamButton);
+
+  const teamPageResponse = await page.waitForResponse(response => response.status() === 200);
+
+  assert.equal(true, teamPageResponse.ok());
+
+  // Click & get 200 for: Activity Log
+  const activityLogsButton = '#activity-logs-button';
+
+  await page.waitFor(3000);
+
+  await page.waitForSelector(activityLogsButton);
+  await page.click(activityLogsButton);
+
+  const activityLogsPageResponse = await page.waitForResponse(response => response.status() === 200);
+
+  assert.equal(true, activityLogsPageResponse.ok());
+
+  // Click & get 200 for: Docs
+  const docsButton = '#docs-button';
+
+  await page.waitFor(3000);
+
+  await page.waitForSelector(docsButton);
+  await page.click(docsButton);
+
+  const docsPageResponse = await page.waitForResponse(response => response.status() === 200);
+
+  assert.equal(true, docsPageResponse.ok());
+
+  // Click & get 200 for: API Docs
+  const apiButton = '#api-button';
+
+  await page.waitFor(3000);
+
+  await page.waitForSelector(apiButton);
+  await page.click(apiButton);
+
+  const apiPageResponse = await page.waitForResponse(response => response.status() === 200);
+
+  assert.equal(true, apiPageResponse.ok());
 
   // Delete the project
   await browser.close();
