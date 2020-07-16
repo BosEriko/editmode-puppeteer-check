@@ -34,6 +34,32 @@ const PASSWORD = 'password';
 
   await page.click('button[type="submit"]');
 
+  // Add non collection chunk
+  const addChunkButtonButton = '#add-chunk-button';
+  const addChunkInput = 'div #content_piece_single_line_text_content';
+  const addChunkCreateButton = '#slide-form-content > #new_content_piece > .form-page-top-section > .inline-flex > .button';
+  const closeAddChunkForm = '.c-content_pieces > #slide-form > #slide-form-inner > .js-close-slide-form > svg';
+
+  await page.waitForSelector(addChunkButtonButton);
+  await page.click(addChunkButtonButton);
+
+  await page.waitFor(3000);
+
+  await page.waitForSelector(addChunkInput);
+  await page.type(addChunkInput, 'Test Chunk');
+
+  await page.waitFor(3000);
+
+  await page.waitForSelector(addChunkCreateButton);
+  await page.click(addChunkCreateButton);
+
+  await page.waitFor(3000);
+
+  await page.waitForSelector(closeAddChunkForm);
+  await page.click(closeAddChunkForm);
+
+  await page.waitFor(3000);
+
   // Create collection
   const allCollectionsButton = '#all-collections-button';
   const newCollectionButton = '#new-collection-button';
@@ -63,12 +89,12 @@ const PASSWORD = 'password';
 
   await page.waitForSelector(newCollectionSaveButton);
   await page.click(newCollectionSaveButton);
-  
-  // await page.screenshot({ path: './tmp/collection-after-save.jpg', type: 'jpeg' });
 
-  await browser.close();
+  // Add chunk to collection
+  // await page.screenshot({ path: './tmp/open-add-chunk-form.jpg', type: 'jpeg' });
 
   // Delete the project
+  await browser.close();
   const projectSettingsButton = '#project-settings-button';
   const projectDeleteButton = '#project-delete-button';
 
@@ -87,6 +113,8 @@ const PASSWORD = 'password';
   await page.click(projectDeleteButton);
 
   await page.waitFor(3000);
+
+  // await page.screenshot({ path: './tmp/collection-after-save.jpg', type: 'jpeg' });
 
   await page.keyboard.press(String.fromCharCode(13));
 
