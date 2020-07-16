@@ -118,18 +118,6 @@ const PASSWORD = 'password';
 
   await page.waitFor(3000);
 
-  // Click & get 200 for: Team
-  const teamButton = '#team-button';
-
-  await page.waitFor(3000);
-
-  await page.waitForSelector(teamButton);
-  await page.click(teamButton);
-
-  const teamPageResponse = await page.waitForResponse(response => response.status() === 200);
-
-  assert.equal(true, teamPageResponse.ok());
-
   // Click & get 200 for: Activity Log
   const activityLogsButton = '#activity-logs-button';
 
@@ -166,8 +154,19 @@ const PASSWORD = 'password';
 
   assert.equal(true, apiPageResponse.ok());
 
+  // Click & get 200 for: Team
+  const teamButton = '#team-button';
+
+  await page.waitFor(3000);
+
+  await page.waitForSelector(teamButton);
+  await page.click(teamButton);
+
+  const teamPageResponse = await page.waitForResponse(response => response.status() === 200);
+
+  assert.equal(true, teamPageResponse.ok());
+
   // Delete the project
-  await browser.close();
   const projectSettingsButton = '#project-settings-button';
   const projectDeleteButton = '#project-delete-button';
 
