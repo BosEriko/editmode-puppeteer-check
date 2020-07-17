@@ -5,7 +5,7 @@ const URL = 'http://localhost:3000';
 const EMAIL = 'dev@editmode.app';
 const PASSWORD = 'password';
 
-const delayTime = delayTime;
+const delayTime = 3000;
 
 (async () => {
   // Authenticate
