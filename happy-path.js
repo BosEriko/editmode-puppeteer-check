@@ -5,6 +5,8 @@ const URL = 'http://localhost:3000';
 const EMAIL = 'dev@editmode.app';
 const PASSWORD = 'password';
 
+const delayTime = delayTime;
+
 (async () => {
   // Authenticate
   const browser = await puppeteer.launch();
@@ -19,7 +21,7 @@ const PASSWORD = 'password';
   await page.click('button[type="submit"]');
 
   // Create a new Project
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
   const timestamp = +(new Date());
   const newProjectButton = ".flex > .flex-1 > .max-w-3xl > .pt-8 > .white";
   const projectNameInput = '#project_name';
@@ -27,7 +29,7 @@ const PASSWORD = 'password';
   await page.waitForSelector(newProjectButton);
   await page.click(newProjectButton);
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   await page.waitForSelector(projectNameInput);
   await page.type(projectNameInput, `${timestamp}-project`);
@@ -43,22 +45,22 @@ const PASSWORD = 'password';
   await page.waitForSelector(addChunkButton);
   await page.click(addChunkButton);
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   await page.waitForSelector(addChunkInput);
   await page.type(addChunkInput, 'Test Chunk');
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   await page.waitForSelector(addChunkCreateButton);
   await page.click(addChunkCreateButton);
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   await page.waitForSelector(closeAddChunkForm);
   await page.click(closeAddChunkForm);
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   // Create collection
   const allCollectionsButton = '#all-collections-button';
@@ -71,7 +73,7 @@ const PASSWORD = 'password';
   await page.waitForSelector(allCollectionsButton);
   await page.click(allCollectionsButton);
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   await page.waitForSelector(newCollectionButton);
   await page.click(newCollectionButton);
@@ -85,12 +87,12 @@ const PASSWORD = 'password';
   await page.waitForSelector(addFieldInput);
   await page.type(addFieldInput, 'Test Field');
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   await page.waitForSelector(newCollectionSaveButton);
   await page.click(newCollectionSaveButton);
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   // Add chunk to collection
   const addCollectionChunkButton = '#add-collection-chunk-button';
@@ -101,27 +103,27 @@ const PASSWORD = 'password';
   await page.waitForSelector(addCollectionChunkButton);
   await page.click(addCollectionChunkButton);
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   await page.waitForSelector(addCollectionChunkInput);
   await page.type(addCollectionChunkInput, 'Test Collection Chunk');
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   await page.waitForSelector(addCollectionChunkCreateButton);
   await page.click(addCollectionChunkCreateButton);
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   await page.waitForSelector(closeAddCollectionChunkForm);
   await page.click(closeAddCollectionChunkForm);
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   // Click & get 200 for: Activity Log
   const activityLogsButton = '#activity-logs-button';
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   await page.waitForSelector(activityLogsButton);
   await page.click(activityLogsButton);
@@ -133,7 +135,7 @@ const PASSWORD = 'password';
   // Click & get 200 for: Docs
   const docsButton = '#docs-button';
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   await page.waitForSelector(docsButton);
   await page.click(docsButton);
@@ -145,7 +147,7 @@ const PASSWORD = 'password';
   // Click & get 200 for: API Docs
   const apiButton = '#api-button';
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   await page.waitForSelector(apiButton);
   await page.click(apiButton);
@@ -157,7 +159,7 @@ const PASSWORD = 'password';
   // Click & get 200 for: Team
   const teamButton = '#team-button';
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   await page.waitForSelector(teamButton);
   await page.click(teamButton);
@@ -173,20 +175,20 @@ const PASSWORD = 'password';
   await page.waitForSelector(projectSettingsButton);
   await page.click(projectSettingsButton);
 
-  await page.waitFor(3000);
+  await page.waitFor(delayTime);
 
   await page.evaluate(() => {
     document.getElementById('project-delete-button').scrollIntoView();
   });
 
-  await page.waitFor(3000);
+  await page.screenshot({ path: './tmp/before-delete.jpg', type: 'jpeg' });
 
-  await page.waitForSelector(projectDeleteButton);
+  // await page.waitForSelector(projectDeleteButton);
   await page.click(projectDeleteButton);
 
-  await page.waitFor(3000);
+  await page.screenshot({ path: './tmp/after-delete.jpg', type: 'jpeg' });
 
-  // await page.screenshot({ path: './tmp/collection-after-save.jpg', type: 'jpeg' });
+  await page.waitFor(delayTime);
 
   await page.keyboard.press(String.fromCharCode(13));
 
