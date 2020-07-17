@@ -11,7 +11,6 @@ const delayTime = 3000;
   // Authenticate
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  const navigationPromise = page.waitForNavigation();
 
   await page.setViewport({ width: 1366, height: 1024 });
 
@@ -181,18 +180,16 @@ const delayTime = 3000;
     document.getElementById('project-delete-button').scrollIntoView();
   });
 
-  await page.screenshot({ path: './tmp/before-delete.jpg', type: 'jpeg' });
+  await page.waitForSelector(projectDeleteButton);
 
-  // await page.waitForSelector(projectDeleteButton);
+  page.on('dialog', async dialog => {
+    console.log('here');
+    await dialog.accept();
+  });
+
   await page.click(projectDeleteButton);
 
-  await page.screenshot({ path: './tmp/after-delete.jpg', type: 'jpeg' });
-
   await page.waitFor(delayTime);
-
-  await page.keyboard.press(String.fromCharCode(13));
-
-  await navigationPromise;
 
   // Close the browser
   await browser.close();
